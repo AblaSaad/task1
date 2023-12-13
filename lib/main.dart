@@ -1,144 +1,59 @@
-import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:flutter/material.dart';
+import 'package:task1/widgets/audio_widget.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Assets Audio Player Example'),
-        ),
-        body: MyPlayer(),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
+      home: const MyHomePage(title: 'Home Page2'),
     );
   }
 }
 
-class MyPlayer extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
   @override
-  _MyPlayerState createState() => _MyPlayerState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyPlayerState extends State<MyPlayer> {
-  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
-  bool isPlaying = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _assetsAudioPlayer.stop();
-    super.dispose();
-  }
-
+class _MyHomePageState extends State<MyHomePage> {
+  var fileNames = [
+    "sample1",
+    "sample2",
+    "sample3",
+    "sample4",
+    "sample5",
+  ];
   @override
   Widget build(BuildContext context) {
-    return ListView(
-
-       children: [
-
-         ListTile(
-
-         leading:Text('Sample 1'),
-         trailing:   IconButton(
-          icon: isPlaying? Icon(Icons.pause):  Icon(Icons.play_arrow)
-        ,
-        onPressed: () async {
-
-        await _assetsAudioPlayer.open(
-        Audio("assets/sounds/sample1.mp3"),
-        );
-
-        },
-        ),
-
-
-
-
-
-        ),
-         ListTile(
-
-         leading:Text('Sample 2'),
-        trailing:   IconButton(
-        icon: isPlaying? Icon(Icons.pause):  Icon(Icons.play_arrow)
-        ,
-        onPressed: () async {
-
-        await _assetsAudioPlayer.open(
-        Audio("assets/sounds/sample2.mp3"),
-        );
-
-        },
-        ),
-
-
-
-
-
-        ),
-         ListTile(
-
-         leading:Text('Sample 3'),
-         trailing:   IconButton(
-         icon:  Icon(isPlaying? Icons.pause:  Icons.play_arrow),
-         onPressed: () async {
-
-        await _assetsAudioPlayer.open(
-        Audio("assets/sounds/sample3.wav"),
-        );
-
-        },
-        ),
-
-
-
-
-
-        ) ,
-         ListTile(
-
-         leading:Text('Sample 4'),
-        trailing:   IconButton(
-        icon: isPlaying? Icon(Icons.pause):  Icon(Icons.play_arrow)
-        ,
-        onPressed: () async {
-
-        await _assetsAudioPlayer.open(
-        Audio("assets/sounds/sample4.wav"),
-        );
-
-        },
-        ),
-
-        ),
-         ListTile(
-
-         leading:Text('Sample 5'),
-        trailing:   IconButton(
-        icon: isPlaying? Icon(Icons.pause):  Icon(Icons.play_arrow)
-        ,
-        onPressed: () async {
-
-        await _assetsAudioPlayer.open(
-        Audio("assets/sounds/sample5.wav"),
-        );
-
-        },
-        ),
-
-        ),
-
-
-       ] );
-
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      body: ListView.builder(
+          itemCount: fileNames.length,
+          itemBuilder: (context, index) {
+            return AudioWidgetEx(fileNames[index], index, fileNames.length);
+          }),
+    );
   }
 }
+

@@ -64,9 +64,9 @@ flutter:
   assets:
     - assets/sounds/sample1.mp3
     - assets/sounds/sample2.mp3
-    - assets/sounds/sample3.wav
-    - assets/sounds/sample4.wav
-    - assets/sounds/sample5.wav
+    - assets/sounds/sample3.mp3
+    - assets/sounds/sample4.mp3
+    - assets/sounds/sample5.mp3
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
